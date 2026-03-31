@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Seeker — AI Job Application Agent
 
-## Getting Started
+An AI-powered job application assistant that searches job boards, tailors your CV for each role, and manages the review/approval process — all in a clean web UI.
 
-First, run the development server:
+Built with **Next.js 16**, **TypeScript**, **Tailwind CSS**, and **Claude claude-opus-4-6** (Anthropic).
+
+## What it does
+
+1. **Upload your CV** — PDF, DOCX, or plain text
+2. **Set your criteria** — titles, location, salary, skills, dealbreakers
+3. **Add job board URLs** — e.g. `reed.co.uk`, `linkedin.com/jobs`
+4. **Claude searches** — finds and scores matching roles in real time
+5. **You select** — pick which roles to apply for from the shortlist
+6. **Claude tailors your CV** — for each selected role, without fabricating anything
+7. **You review** — approve, reject, or request edits per application
+8. **Copy & apply** — copy your tailored CV and open the job link to apply
+
+> **Hard rule:** Nothing is ever submitted without your explicit approval.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or later
+- An [Anthropic API key](https://console.anthropic.com/) (get one free at console.anthropic.com)
+
+## Setup
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/mal67/Seeker.git
+cd Seeker
+
+# 2. Install dependencies
+npm install
+
+# 3. Add your API key
+cp .env.local.example .env.local
+# Open .env.local and replace "your_api_key_here" with your actual key
+
+# 4. Start the app
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open **http://localhost:3000** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variable
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the project root with:
 
-## Learn More
+```
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+```
 
-To learn more about Next.js, take a look at the following resources:
+Your API key is never committed to git (`.env.local` is in `.gitignore`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| AI | Anthropic SDK — claude-opus-4-6 |
+| CV parsing | pdf-parse, mammoth |
+| Job search | Claude with web_search + web_fetch tools |
