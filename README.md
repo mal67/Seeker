@@ -1,3 +1,4 @@
+# get rich or die trying
 # Seeker — AI Job Application Agent
 
 An AI-powered job application assistant that searches job boards, tailors your CV for each role, and manages the review/approval process — all in a clean web UI.
